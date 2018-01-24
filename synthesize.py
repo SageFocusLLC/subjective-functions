@@ -42,6 +42,8 @@ if __name__ == "__main__":
     parser.add_argument("--tol", type=float, default=1e-9, help="Gradient scale at which to terminate optimization")
     parser.add_argument("--source", "-s", required=True, nargs='+',
             help="List of file to use as source textures")
+    parser.add_argument("--seed-image", "-si", nargs='+',
+            help="Single file to use as the seed image")
 
     args = parser.parse_args()
 
@@ -108,6 +110,11 @@ if __name__ == "__main__":
     else:
         # Shift the whole thing to be near zero
         x0 += 10 - gram.colour_offsets
+
+    if args.seed_image:
+        for im in gram.get_images(args.seed_image,args.output_width, None):
+            x0 = im
+        height = x0.shape[1]
 
     #x0 = preprocess(load_img('../sources/smokeb768.jpg'))
     
