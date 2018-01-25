@@ -112,7 +112,7 @@ if __name__ == "__main__":
         x0 += 10 - gram.colour_offsets
 
     if args.seed_image:
-        for im in gram.get_images(args.seed_image,args.output_width, None):
+        for im in gram.get_images(args.seed_image,source_width=args.output_width):
             x0 = im
         height = x0.shape[1]
 
